@@ -202,7 +202,7 @@ export const BentoGridItem = ({
 										animationData,
 										rendererSettings: {
 											preserveAspectRatio:
-												"xMidYmid slice",
+												"xMidYMid slice",
 										},
 									}}
 								/>
