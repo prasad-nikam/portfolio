@@ -33,7 +33,7 @@ const Hero = () => {
           <TextGenerateEffect
             filter={false}
             duration={2}
-            className="text-center text-[40px] md:text-5xl lg: text-6xl"
+            className="text-center text-[40px] md:text-5xl lg:text-6xl sm:text-3xl"
             words="Transforming Concepts Into Seamless User Experiences"
           />
           <p>Hi I&apos;m Prasad, a Software developer at based in India</p>
