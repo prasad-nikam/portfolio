@@ -7,6 +7,7 @@ import Lottie from "react-lottie";
 import animationData from "@/data/confetti.json";
 import MagicButton from "./MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
+import { pass } from "three/webgpu";
 
 export const BentoGrid = ({
 	className,
@@ -50,10 +51,44 @@ export const BentoGridItem = ({
 	titleClassName?: string;
 	spareImg?: string;
 }) => {
+	const copyEmailToClipboard = () => {
+		if (navigator.clipboard) {
+			// Try using the clipboard API
+			navigator.clipboard
+				.writeText("nikamprasad52@gmail.com")
+				.then(() => {
+					setCopied(true);
+				})
+				.catch((err: Error) => {
+					console.error("Clipboard API failed: ", err);
+					fallbackCopyTextToClipboard("nikamprasad52@gmail.com");
+				});
+		} else {
+			// Fallback if the Clipboard API is not available
+			fallbackCopyTextToClipboard("nikamprasad52@gmail.com");
+		}
+	};
+
+	const fallbackCopyTextToClipboard = (text: string) => {
+		const textArea = document.createElement("textarea");
+		textArea.value = text;
+		textArea.style.position = "fixed"; // Avoid scrolling to bottom
+		textArea.style.left = "-9999px"; // Hide the text area off-screen
+		document.body.appendChild(textArea);
+		textArea.select();
+
+		try {
+			document.execCommand("copy");
+			setCopied(true);
+		} catch (err) {
+			console.error("Fallback: Could not copy text: ", err);
+		}
+		document.body.removeChild(textArea);
+	};
+	// ========================================================================
 	const [copied, setCopied] = useState(false);
 	const handleCopy = () => {
-		navigator.clipboard.writeText("nikamprasad52@gmail.com");
-		setCopied(true);
+		copyEmailToClipboard();
 	};
 	return (
 		<div
